@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Horarios y Ubicación {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/Horarios.css' %}" media="screen">
+{% endblock css %}
+{% block content %}
+{% include 'includes/header.html' %}
+
+<section class="u-align-center u-clearfix u-block-b2ac-1" custom-posts-hash="[]"
+  data-section-properties="{&quot;margin&quot;:&quot;none&quot;,&quot;stretch&quot;:true}" data-id="b2ac"
+  data-posts-content="[]" style="background-image: linear-gradient(rgb(206, 223, 245), rgb(230, 236, 245), #f2f2f2);" data-style="table-3new" id="sec-77de" data-source="Sketch">
+  {% if horario == 'noe' %}
+  <script>
+    Swal.fire({
+      background: "#fff",
+      title: "<strong>HORARIO/UBICACIÓN</strong> <br> <h3 style='color: rgb(255,105,97)'>NO EXISTE</h3>",
+      html: "En el administrador dirígase a <br><strong style='color: #3085d6'>Pestañas &#10142; P.Horario y Ubicación </strong> <br> y cree uno",
+      icon: 'error',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'ok',
+    })
+  </script>
+  {% else %}
+  {% if not horario.public and not horario.info %}
+  <script>
+    Swal.fire({
+      background: "#fff",
+      title: "<strong>No visible</strong>",
+      html: "En el administrador dirígase a <br><strong style='color: #3085d6'>Pestañas &#10142; P. Horario y Ubicación</strong><br> para activarlo",
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'ok',
+    })
+  </script>
+  {% else %}
+  {% if horario.public %}
+  <div class="u-clearfix u-sheet u-valign-middle u-block-b2ac-2" style="min-height: 200px">
+    <div class="u-expanded-width u-table u-table-responsive u-block-control u-block-b2ac-40"
+      style="margin-top: 42px; margin-right: auto; margin-bottom: 42px; margin-left: 0" data-block="83"
+      data-block-type="Table">
+      <table class="u-table-entity u-block-b2ac-3" style="">
+        <colgroup>
+
+
+          <col width="49.9%">
+          <col width="50.1%">
+        </colgroup>
+        <thead class="u-black u-table-header u-block-b2ac-4" style="font-weight: 700; background-image: none">
+
+          <tr style="height: 30.7px;">
+            <th class="u-table-cell u-block-control u-palette-1-base u-block-b2ac-12" style="background-image: none;"
+              data-block="90" data-block-type="TableCell">Dias </th>
+            <th class="u-table-cell u-block-control u-palette-1-base u-block-b2ac-34" style="background-image: none;"
+              data-block="91" data-block-type="TableCell">Hora </th>
+          </tr>
+        </thead>
+        <tbody class="u-table-alt-palette-1-light-3 u-table-body u-block-b2ac-9" style="">
+          {% for h in horario.horarios.all %}
+
+          <tr style="height: 65px;">
+
+
+            <td class="u-table-cell u-block-control u-block-b2ac-26" style="font-family: 'Nunito', sans-serif;" data-block="98"
+              data-block-type="TableCell">{% if not h.get_to_display %} {{ h.get_the_display }} {% else %} {{ h.get_the_display }} a {{ h.get_to_display }} {% endif %}</td>
+            <td class="u-table-cell u-block-control u-block-b2ac-31" style="font-family: 'Nunito', sans-serif;" data-block="99"
+              data-block-type="TableCell">De {% if h.of.hour >= 12 and h.of.hour <= 24 %}{{ h.of }} pm {% else %} {{ h.of }} am {% endif %} a {% if h.until.hour >= 12 and h.until.hour <= 24 %}{{ h.until }} pm {% else %} {{ h.until }} am {% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot class="hidden u-table-footer u-block-b2ac-35" style="">
+          <tr class="hidden u-block-b2ac-50" style="">
+
+
+            <td class="u-table-cell u-block-control u-block-b2ac-53" style="" data-block="110"></td>
+            <td class="u-table-cell u-block-control u-block-b2ac-54" style="" data-block="111"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <style data-mode="XL">
+    @media (max-width: 0px) {
+      .u-block-b2ac-2 {
+        min-height: 464px
+      }
+
+      .u-block-b2ac-40 {
+        margin-top: 42px;
+        margin-right: auto;
+        margin-bottom: 42px;
+        margin-left: 0
+      }
+
+      .u-block-b2ac-4 {
+        font-weight: 700;
+        background-image: none
+      }
+
+      .u-block-b2ac-12 {
+        background-image: none
+      }
+
+      .u-block-b2ac-34 {
+        background-image: none
+      }
+    }
+  </style>
+  <style data-mode="LG">
+    @media (max-width: 0px) {
+      .u-block-b2ac-2 {
+        min-height: 464px
+      }
+
+      .u-block-b2ac-40 {
+        margin-top: 42px;
+        margin-bottom: 42px
+      }
+
+      .u-block-b2ac-3 {
+        min-height: 100px
+      }
+
+      .u-block-b2ac-4 {
+        font-weight: 700;
+        background-image: none
+      }
+
+      .u-block-b2ac-12 {
+        background-image: none
+      }
+
+      .u-block-b2ac-34 {
+        background-image: none
+      }
+    }
+  </style>
+  <style data-mode="MD">
+    @media (max-width: 0px) {
+      .u-block-b2ac-2 {
+        min-height: 464px
+      }
+
+      .u-block-b2ac-40 {
+        margin-top: 42px;
+        margin-bottom: 42px
+      }
+
+      .u-block-b2ac-3 {
+        min-height: 100px
+      }
+
+      .u-block-b2ac-4 {
+        font-weight: 700;
+        background-image: none
+      }
+
+      .u-block-b2ac-12 {
+        background-image: none
+      }
+
+      .u-block-b2ac-34 {
+        background-image: none
+      }
+    }
+  </style>
+  <style data-mode="SM">
+    @media (max-width: 0px) {
+      .u-block-b2ac-2 {
+        min-height: 464px
+      }
+
+      .u-block-b2ac-40 {
+        margin-top: 42px;
+        margin-bottom: 42px
+      }
+
+      .u-block-b2ac-3 {
+        min-height: 100px
+      }
+
+      .u-block-b2ac-4 {
+        font-weight: 700;
+        background-image: none
+      }
+
+      .u-block-b2ac-12 {
+        background-image: none
+      }
+
+      .u-block-b2ac-34 {
+        background-image: none
+      }
+    }
+  </style>
+  <style data-mode="XS">
+    @media (max-width: 0px) {
+      .u-block-b2ac-2 {
+        min-height: 464px
+      }
+
+      .u-block-b2ac-40 {
+        margin-top: 42px;
+        margin-bottom: 42px
+      }
+
+      .u-block-b2ac-3 {
+        min-height: 100px
+      }
+
+      .u-block-b2ac-4 {
+        font-weight: 700;
+        background-image: none
+      }
+
+      .u-block-b2ac-12 {
+        background-image: none
+      }
+
+      .u-block-b2ac-34 {
+        background-image: none
+      }
+    }
+  </style>
+  {% endif %}
+  {% if horario.info %}
+  <div class="u-clearfix u-gradient u-section-2" id="sec-11ff">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
+              <div class="u-container-layout u-valign-middle u-container-layout-1">
+                <h2 class="u-custom-font u-font-oswald u-text u-text-palette-1-base u-text-1"
+                  data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0"
+                  data-animation-direction="Down" style="font-family: 'Nunito', sans-serif;">{{ clinica.title }}</h2>
+                <p class="u-text u-text-palette-5-dark-2 u-text-2" data-animation-name="fadeIn"
+                  data-animation-duration="1000" data-animation-delay="250" data-animation-direction="Down" style="font-family: 'Nunito', sans-serif;">{{ info.address }} {{ info.district }} | Lima - Peru</p>
+                <p class="u-text u-text-palette-5-dark-2 u-text-3" data-animation-name="fadeIn"
+                  data-animation-duration="1000" data-animation-delay="250" data-animation-direction="Down" style="font-family: 'Nunito', sans-serif;">{{ info.gmail }}</p>
+                <p class="u-text u-text-palette-5-dark-2 u-text-4" data-animation-name="fadeIn"
+                  data-animation-duration="1000" data-animation-delay="250" data-animation-direction="Down" style="font-family: 'Nunito', sans-serif;">
+                  <a
+                    href="https://api.whatsapp.com/send?phone=51{{info.phome}}&text=Bienvenid@, en que podemos ayudarte? :)">+51
+                    {{ info.phome }}</a>
+                </p>
+              </div>
+            </div>
+            <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
+              <div class="u-container-layout u-container-layout-2">
+                <div class="u-expanded u-grey-10 u-map">
+                  <div class="embed-responsive">
+                    {% if info %}
+                    <iframe width="600" height="450" style="border:0; padding: 4px 4px 4px 4px;" loading="lazy"
+                      allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAZeliFZqV-EM0HSy5AlO6D-k8IpwoUHd4
+                              &q={{ info.address }},{{ info.district }}">
+                    </iframe>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
+  {% endif %}
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock content %}

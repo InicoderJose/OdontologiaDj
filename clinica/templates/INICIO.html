@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Inicio {% endblock title %}
+{% block css %} <link rel="stylesheet" href="{% static 'css/INICIO.css' %}" media="screen"> {% endblock css %}
+{% block content %}
+{% include 'includes/header.html' %}
+
+{% for of in oferta %}
+{% if of.public %}
+{% if of.image and of.title and not of.description %}
+<script>
+Swal.fire({
+  html: "<div><img src='{{ of.image.url }}'></div>",
+  confirmButtonText: 'Lo quiero!',
+  confirmButtonColor: '#478ac9'
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location = '{% url "home_app:contacto" %}'
+  }
+})
+</script>
+{% else %}
+{% if of.image %}
+<section class="u-clearfix u-image u-shading u-section-1" src="" data-image-width="750" data-image-height="421" id="sec-03f9" style="background-image: url('{{ of.image.url }}'); object-fit: cover;">
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <div class="u-clearfix u-layout-wrap u-layout-wrap-1">
+      <div class="u-layout">
+        <div class="u-layout-row">
+          <div class="u-align-center u-container-style u-layout-cell u-left-cell u-opacity u-opacity-80 u-palette-1-light-3 u-size-39-md u-size-39-sm u-size-39-xs u-size-45-lg u-size-45-xl u-layout-cell-1">
+            <div class="u-container-layout u-container-layout-1">
+              <h2 class="u-text u-text-default u-text-palette-1-base u-text-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><b style="color: red; text-transform: uppercase; ">{{ of.title }}</b></h2>
+              <p class="u-align-center u-custom-font u-heading-font u-text u-text-palette-1-base u-text-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="" style="font-size: 1rem; text-transform: uppercase; font-family: 'Nunito', sans-serif;">{{ of.description }}</p>
+            </div>
+          </div>
+          <div class="u-align-left u-container-style u-layout-cell u-opacity u-opacity-65 u-palette-1-light-3 u-right-cell u-size-15-lg u-size-15-xl u-size-21-md u-size-21-sm u-size-21-xs u-layout-cell-2">
+            <div class="u-container-layout u-valign-middle u-container-layout-2">
+              <a href="{% url 'home_app:contacto' %}" class="u-border-0 u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">Lo quiero!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% else %}
+<div class="d-flex flex-lg-row justify-content-center flex-column align-items-center p-3" style="width: 100%; height: auto; background-color: #041690;">
+  <div class="p-0 d-flex flex-column align-items-lg-start align-items-center" style="margin: auto 0; width: 50%;">
+    <h2 class="m-0" style="color: rgb(255, 0, 0); text-transform: uppercase; font-family: 'Nunito', sans-serif;"><b>{{ of.title }}</b></h2>
+    <p class="m-0" style="font-size: 1rem; color: white; text-transform: uppercase; font-family: 'Nunito', sans-serif;">{{ of.description }}</p>
+  </div>
+  <div class="d-flex flex-column align-items-center p-0" style="width: 20%;">
+    <div style="margin: auto 0; width: max-content;" class="" id="btnoferta">
+      <a href="{% url 'home_app:contacto' %}" class="btn btn-primary" >Lo quiero!</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% if inicio %}
+<section class="u-align-center u-clearfix u-gradient u-section-2" id="carousel_819a">
+  <div class="u-clearfix u-layout-wrap u-layout-wrap-1">
+    <div class="u-layout">
+      <div class="u-layout-row row">
+        <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h1 class="u-text u-text-palette-1-base u-text-1" style="font-weight: bold;"><b>{{ inicio.title }}</b></h1>
+            <h5 class="u-text u-text-2">{{ inicio.sub_title }}</h5>
+            <div class="u-border-20 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+            <p class="u-text u-text-palette-5-dark-2 u-text-3">{{ inicio.bdescription }}</p>
+            <a href="{% url 'home_app:contacto' %}" class="u-active-palette-1-base u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-palette-1-base u-btn u-btn-round u-button-style u-hover-palette-1-base u-none u-radius-8 u-text-active-white u-text-hover-white u-btn-1 mb-4">Contáctanos</a>
+          </div>
+        </div>
+        <div class="u-container-style u-image u-layout-cell u-right-cell u-size-30 u-image-1" style="background-image: url('{{ inicio.image.url }}'); border-radius: 15px;" id="clinicaimage">
+          <div class="u-container-layout u-container-layout-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+<!-- {% if is_paginated %}
+<div class="container mb-5">
+    <div class="mt-5" style="text-align: center;">
+      <h2 class="u-text u-text-palette-1-base u-text-1" style="text-decoration: underline;"><b>Servicos Médicos</b></h2>
+      <div class="mb-5">
+        <a href="google.com" class="btn btn-outline-primary btn-lg" role="button" aria-disabled="true">Ver Todos</a>
+      </div>
+      <a name="aea"></a>
+    </div> 
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="cards-wrapper">
+            {% for s in servicios %}
+            <div class="card">
+              <img src="{{ s.image.url }}" class="card-img-top" alt="..." style="height: 320px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title">{{ s.title }}</h5>
+                <p class="card-text">{{ s.content|safe }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+      {% if page_obj.has_previous %}
+      <a class="carousel-control-prev" href="?page={{ page_obj.previous_page_number }}&#aea" role="button" data-slide="prev" name="paginate">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+      <a class="carousel-control-next" href="?page={{ page_obj.next_page_number }}&#aea" role="button" data-slide="next" name="paginate">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %} -->
+
+
+
+{% if inicio.Mision or inicio.vision %}
+<section class="u-clearfix u-section-4 p-0" id="carousel_0e8c" style="height: auto;">
+  <div class="u-expanded-width u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
+  <div class="u-list u-list-1 mb-0 pb-0">
+    <div class="u-repeater u-repeater-1 row justify-content-center">
+      {% if inicio.Mision %}
+      <div class="u-align-center u-container-style u-list-item u-repeater-item u-white u-list-item-1 col-lg-6">
+        <div class="u-container-layout u-similar-container u-container-layout-1">
+          <h2 class="u-text u-text-default u-text-palette-1-base u-text-1">A</h2>
+          <h3 class="u-text u-text-palette-1-base u-text-2">Misión</h3>
+          <p class="u-text u-text-3">{{ inicio.Mision }}</p>
+<a href="{% url 'home_app:clinica' %}"
+            class="u-border-1 u-border-active-palette-1-base u-border-black u-border-hover-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-text-active-palette-1-base u-text-body-color u-text-hover-palette-1-base u-btn-1" style="color: #478ac9;">Saber más</a>          
+        </div>
+      </div>
+      {% endif %}
+      {% if inicio.vision %}
+      <div class="u-align-center u-container-style u-list-item u-repeater-item u-white u-list-item-2 col-lg-6">
+        <div class="u-container-layout u-similar-container u-container-layout-2">
+          <h2 class="u-text u-text-default u-text-palette-1-base u-text-4">B</h2>
+          <h3 class="u-text u-text-palette-1-base u-text-5">Visión</h3>
+          <p class="u-text u-text-6">{{ inicio.vision }}</p>
+          <p></p>
+          <a href="{% url 'home_app:clinica' %}"
+            class="u-border-1 u-border-active-palette-1-base u-border-black u-border-hover-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-text-active-palette-1-base u-text-body u-text-hover-palette-1-base u-btn-2">Saber más</a>
+        </div>
+      </div>
+      {% endif %}
+      <div style="display: block; background-color: #478ac9"></div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if inicio.empleados.all %}
+<div class="d-flex justify-content-center">
+  <p style="color: #478ac9; font-weight: bold; font-size: 2.25rem; line-height: 1.1; text-transform: uppercase;"><b>Nosotros</b></p>
+</div>
+<section class="u-align-center u-clearfix u-section-5" id="sec-9002">
+  <div class="u-expanded-width u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
+  <div class="u-list u-list-1">
+    <div class="u-repeater u-repeater-1 row justify-content-center">
+      {% for e in inicio.empleados.all %}
+      <div class="u-align-center u-container-style u-list-item u-palette-1-light-3 u-repeater-item col-lg-4 col-12" style="height: auto; border-radius: 15px;">
+        <div class="u-container-layout u-similar-container u-container-layout-1">
+          <div alt="" class="u-image u-image-circle u-image-1" data-image-width="420" data-image-height="420" style="background-image: url('{{ e.image.url }}')"></div>
+          <h5 class="u-text u-text-default u-text-2" style="color: #478ac9; font-size: 1rem;">{{ e.name }} {{e.last_name}}</h5>
+          {% for esp in e.especialidad.all %}
+          <h6 class="u-custom-font u-text u-text-default u-text-font u-text-3" style="color: #053e5a; font-size: .8rem; font-weight: bold;">{{ esp.name }}</h6>
+          {% endfor %}
+          <h6 class="u-text u-text-default u-text-2" style="color: #478ac9; font-size: .9rem;">C.O.P: {{ e.cop }}</h6>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if inicio.comentarios.all %}
+<div class="d-flex justify-content-center mt-5 mb-2">
+  <p style="color: #478ac9; font-weight: bold; font-size: 2.25rem; line-height: 1.1; text-transform: uppercase;"><b>Comentarios</b></p>
+</div>
+<section class="u-align-center u-clearfix u-gradient u-section-6" id="carousel_9742">
+    <div class="u-clearfix" style="width: auto;">
+      <div class="u-expanded-width u-list u-list-1 p-0">
+        <div class="d-flex flex-row align-items-baseline flex-wrap justify-content-around">
+          {% for c in inicio.comentarios.all %}
+          <div class="u-container-style u-list-item u-radius-7 u-repeater-item u-shape-round u-white u-list-item-1 col-lg-6 col-sm-12 mb-5">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+              {% if c.image %}
+              <div alt="" class="u-border-8 u-border-palette-1-light-3 u-image u-image-circle u-image-1" style="background-image: url('{{ c.image.url }}'); border-radius: 15px;"
+                data-image-width="211" data-image-height="211"></div>
+              {% else %}
+              <div alt="" class="u-border-8 u-border-palette-1-light-3 u-image u-image-circle u-image-1" style="background-image: url('static/personAnonimo.jpg');"
+                data-image-width="211" data-image-height="211">
+              </div>
+              {% endif %}
+              <p class="u-text u-text-2" style="color: #053e5a;">{{ c.comment }}</p>
+              <h5 class="u-text u-text-3" style="color: #478ac9;">{{ c.client }}</h5>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</section>
+{% endif %}
+
+{% if vacio %}
+<script>
+  Swal.fire({
+    background: "#fff",
+    title: "<strong>SIN INFORMACIÓN</strong>",
+    html: "En el administrador dirígase a <br><strong style='color: #3085d6'>Pestañas &#10142; P. Inicio</strong><br> para mostrar datos",
+    icon: 'warning',
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ok',
+  })
+</script>
+{% endif %}
+
+{% include 'includes/footer.html' %}
+{% endblock content %}

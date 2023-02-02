@@ -1,0 +1,65 @@
+<footer class="footerjose d-flex flex-column" style="width: 100%; height: auto; background-color: #f2f2f2; border-top: 2px solid whitesmoke;">
+  <div class="d-flex w-100 flex-lg-row justify-content-around flex-column align-items-center" style="padding-top: 1rem; padding-bottom: 1rem;">
+    <div class="logojose w-10">
+      {% if inicio %}
+      <a href=""><img style="height: 50px;" src="{{ inicio.logo.url }}" alt=""></a>
+      {% endif %}
+    </div>
+    {% if info %}
+    <div class="d-flex flex-lg-row justify-content-between flex-column align-items-center" style="padding: 1rem 0 1rem 0;">
+      <div class="p-lg-2 py-md-1">
+        <p class="m-0"><i class="fa fa-envelope-o" aria-hidden="true"></i> {{ info.gmail }}</p>
+      </div>
+      <div class="p-lg-2">
+        <p class="m-0"><i class="fa fa-phone" aria-hidden="true"></i> {{ info.phome }}</p>
+      </div>
+      <div class="p-lg-2">
+        <p class="m-0"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ info.address }} - {{ info.district }}</p>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      {% for co in info.redes.all %}
+      {% if 'facebook.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true" style="font-size: 1.5em;"></i></a>
+      {% endif %}
+      {% if 'instagram.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa-brands fa-square-instagram" style="font-size: 1.5em;"></i></a>
+      {% endif %}
+      {% if 'linkedin.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa fa-linkedin" style="font-size: 1.5em; color:rgb(0, 140, 255);"></i></a>
+      {% endif %}
+      {% if 'youtube.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa-brands fa-youtube" style="font-size: 1.5em; color: red;"></i></a>
+      {% endif %}
+      {% if 'tiktok.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa-brands fa-tiktok" style="font-size: 1.5em;"></i></a>
+      {% endif %}
+      {% if 'pinterest.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa-brands fa-pinterest" style="font-size: 1.5em; color: red"></i></a>
+      {% endif %}
+      {% if 'twitter.com' in co.url %}
+      <a href="{{ co.url }}" target="_blank"><i class="fa-brands fa-twitter" style="font-size: 1.5em; color: rgb(72, 129, 235)"></i></a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="copyright w-100 m-0 p-0" style="background-color: #335a80; height: 10%;">
+    <div class="copyright-list clearfix d-flex flex-lg-row justify-content-evenly m-0 flex-column align-items-center">
+      <div>
+        <p>@Todos los Derechos Reservados 2023 - Lima, Perú </p>
+      </div>
+      <div>
+        <p>Aviso de Privacidad</p>
+      </div>
+      <div>
+        <p>Desarrollado por <a href="" target="_blank" rel="inicdoer">Inicoder</a></p>
+      </div>
+      
+      
+      
+    </div>
+  </div>
+</footer>

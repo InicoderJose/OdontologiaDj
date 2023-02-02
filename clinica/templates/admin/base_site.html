@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}{{ mycontext.title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrahead %}
+<link rel="icon" href="{{ mycontext.logo.url|safe }}">
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}" class="d-flex">
+        <h1><img src="{{ mycontext.logo.url|safe }}" height="40px" /> {{ mycontext.title }}</h1>
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,846 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Clínica {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/CLINICA.css' %}" media="screen"> {% endblock css %}
+{% block content %}
+{% include 'includes/header.html' %}
+
+{% if clinica == "noe" %}
+<script>
+  Swal.fire({
+    background: "#fff",
+    title: "<strong>Clínica</strong> <br> <h3 style='color: rgb(255,105,97)'>NO EXISTE</h3>",
+    html: "En el administrador dirígase a <br> <strong style='color: #3085d6'>Pestañas &#10142; P. Clínica </strong> <br> y cree uno",
+    icon: 'error',
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ok',
+  })
+</script>
+{% else %}
+{% if not clinica.public %}
+<script>
+  Swal.fire({
+    background: "#fff",
+    title: "<strong>No visible</strong>",
+    html: "En el administrador dirígase a <br><strong style='color: #3085d6'>Pestañas &#10142; P. Clínica</strong><br> para activarlo",
+    icon: 'warning',
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ok',
+  })
+</script>
+{% else %}
+<!-- clinica -->
+
+<section class=" u-clearfix u-gradient u-section-1" id="carousel_e19a" style="min-height: 80%;">
+  <div class="u-expanded-width u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
+  <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1" style="margin-bottom: 0;">
+    <div class="u-gutter-0 u-layout">
+      <div class="u-layout-row">
+        <div class="u-align-left u-container-style u-image u-layout-cell u-left-cell u-size-36 u-image-1"
+          data-image-width="750" data-image-height="421"
+          style="background-image: url('{{ clinica.image.url }}'); min-height: 25rem; border-radius: 15px 0 0 15px;">
+          <div class="u-container-layout u-container-layout-1"></div>
+        </div>
+        <div class="u-align-left u-container-style u-layout-cell u-size-24 u-white u-layout-cell-2"
+          style="min-height: auto; border-radius: 0 15px 14px 0;">
+          <div class="u-container-layout u-container-layout-2">
+            <h2
+              style="color: #478ac9; font-weight: 400; font-size: 2.25rem; line-height: 1.1; margin-top: 20px; margin-bottom: 20px; text-transform: uppercase;">
+              <b>{{ clinica.title }}</b></h2>
+            <p class="u-text u-text-palette-5-dark-2 u-text-2" data-animation-name="fadeIn"
+              data-animation-duration="1000" data-animation-delay="250" data-animation-direction="Down"
+              style="font-size: 1.1rem;">{{ clinica.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if clinica.instalaciones.all %}
+<section class="u-align-center u-clearfix u-grey-5 u-block-8e51-1 mt-2" custom-posts-hash="T"
+  data-section-properties="{&quot;margin&quot;:&quot;none&quot;,&quot;stretch&quot;:true}" data-id="8e51"
+  style="background-image: linear-gradient(rgb(230, 236, 245), white);"
+  data-posts-content="[{'images':[],'maps':[],'videos':[],'icons':[],'textWidth':1140,'textHeight':564,'id':1,'headingProp':'h2','textProp':'text'}]"
+  data-style="carousel-slider-carousel-02" id="sec-7d6b" data-source="Sketch">
+  <div class="d-flex justify-content-center mt-5">
+    <p class="m-0" style="color: #478ac9; font-weight: bold; font-size: 1.8rem; text-transform: uppercase">
+      <b>Instalaciones</b></p>
+  </div>
+  <div class="u-clearfix u-sheet u-valign-middle u-block-8e51-2" style="min-height: 564px; max-width: 100%;">
+    <div
+      class="u-expanded-width u-gallery u-layout-horizontal u-lightbox u-no-transition u-show-text-on-hover u-width-fixed u-block-control u-block-8e51-3"
+      style="margin-top: 30px; margin-bottom: 60px; height: 375px" data-block="15" data-block-type="Gallery">
+      <div class="u-gallery-inner u-block-8e51-4" data-key="rouded">
+        {% for i in clinica.instalaciones.all %}
+        <div class="u-effect-fade u-gallery-item u-block-control u-block-8e51-5" style="border-radius: 15px; margin-right: .1rem;"
+          data-block="16">
+          <div class="u-back-slide u-block-8e51-6" style=""><img class="u-back-image u-block-8e51-7"
+              src="{{ i.image.url }}"
+              style="width: 375px; border-radius: 15px;">
+          </div>
+          <div class="u-over-slide u-shading u-block-8e51-8"
+            style="background-image: linear-gradient(0deg, rgba(var(--black-r),var(--black-g),var(--black-b),0.2), rgba(var(--black-r),var(--black-g),var(--black-b),0.2)); padding-top: 20px; padding-bottom: 20px; padding-left: 20px; padding-right: 20px"
+            data-block-type="">
+            <h3 class="u-gallery-heading"></h3>
+            <p class="u-gallery-text"></p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-prev u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-block-control u-block-8e51-29"
+        href="#" role="button" style="position: absolute; left: 10px; width: 40px; height: 40px" data-block="22">
+        <span aria-hidden="true">
+          <svg viewBox="0 0 451.847 451.847">
+            <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+    c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+    c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path>
+          </svg>
+        </span>
+        <span class="sr-only">
+          <svg viewBox="0 0 451.847 451.847">
+            <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+    c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+    c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path>
+          </svg>
+        </span>
+      </a>
+      <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-next u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-block-control u-block-8e51-30"
+        href="#" role="button" style="position: absolute; right: 10px; width: 40px; height: 40px" data-block="23"
+        data-block-type="GalleryArrows">
+        <span aria-hidden="true">
+          <svg viewBox="0 0 451.846 451.847">
+            <path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+    L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+    c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path>
+          </svg>
+        </span>
+        <span class="sr-only">
+          <svg viewBox="0 0 451.846 451.847">
+            <path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+    L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+    c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+  <style data-mode="XL">
+    @media (max-width: 0px) {
+      .u-block-8e51-1 {
+        background-image: none
+      }
+
+      .u-block-8e51-2 {
+        min-height: 564px
+      }
+
+      .u-block-8e51-31 {
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px
+      }
+
+      .u-block-8e51-3 {
+        margin-top: 30px;
+        margin-bottom: 60px;
+        height: 375px
+      }
+
+      .u-block-8e51-5 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-7 {
+        width: 375px
+      }
+
+      .u-block-8e51-8 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-9 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-11 {
+        width: 375px
+      }
+
+      .u-block-8e51-12 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-13 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-15 {
+        width: 375px
+      }
+
+      .u-block-8e51-16 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-17 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-19 {
+        width: 375px
+      }
+
+      .u-block-8e51-20 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-21 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-23 {
+        width: 375px
+      }
+
+      .u-block-8e51-24 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-25 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-27 {
+        width: 375px
+      }
+
+      .u-block-8e51-28 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-29 {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 40px
+      }
+
+      .u-block-8e51-30 {
+        position: absolute;
+        right: 10px;
+        width: 40px;
+        height: 40px
+      }
+    }
+  </style>
+  <style data-mode="LG">
+    @media (max-width: 0px) {
+      .u-block-8e51-1 {
+        background-image: none
+      }
+
+      .u-block-8e51-2 {
+        min-height: 564px
+      }
+
+      .u-block-8e51-31 {
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px
+      }
+
+      .u-block-8e51-3 {
+        margin-top: 30px;
+        margin-bottom: 60px;
+        height: 375px
+      }
+
+      .u-block-8e51-5 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-7 {
+        width: 375px
+      }
+
+      .u-block-8e51-8 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-9 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-11 {
+        width: 375px
+      }
+
+      .u-block-8e51-12 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-13 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-15 {
+        width: 375px
+      }
+
+      .u-block-8e51-16 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-17 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-19 {
+        width: 375px
+      }
+
+      .u-block-8e51-20 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-21 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-23 {
+        width: 375px
+      }
+
+      .u-block-8e51-24 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-25 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-27 {
+        width: 375px
+      }
+
+      .u-block-8e51-28 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-29 {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 40px
+      }
+
+      .u-block-8e51-30 {
+        position: absolute;
+        right: 10px;
+        width: 40px;
+        height: 40px
+      }
+    }
+  </style>
+  <style data-mode="MD">
+    @media (max-width: 0px) {
+      .u-block-8e51-1 {
+        background-image: none
+      }
+
+      .u-block-8e51-2 {
+        min-height: 564px
+      }
+
+      .u-block-8e51-31 {
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px
+      }
+
+      .u-block-8e51-3 {
+        margin-top: 30px;
+        margin-bottom: 60px;
+        height: 375px
+      }
+
+      .u-block-8e51-5 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-7 {
+        width: 375px
+      }
+
+      .u-block-8e51-8 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-9 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-11 {
+        width: 375px
+      }
+
+      .u-block-8e51-12 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-13 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-15 {
+        width: 375px
+      }
+
+      .u-block-8e51-16 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-17 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-19 {
+        width: 375px
+      }
+
+      .u-block-8e51-20 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-21 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-23 {
+        width: 375px
+      }
+
+      .u-block-8e51-24 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-25 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-27 {
+        width: 375px
+      }
+
+      .u-block-8e51-28 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-29 {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 40px
+      }
+
+      .u-block-8e51-30 {
+        position: absolute;
+        right: 10px;
+        width: 40px;
+        height: 40px
+      }
+    }
+  </style>
+  <style data-mode="SM">
+    @media (max-width: 0px) {
+      .u-block-8e51-1 {
+        background-image: none
+      }
+
+      .u-block-8e51-2 {
+        min-height: 564px
+      }
+
+      .u-block-8e51-31 {
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px
+      }
+
+      .u-block-8e51-3 {
+        margin-top: 30px;
+        margin-bottom: 60px;
+        height: 375px
+      }
+
+      .u-block-8e51-5 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-7 {
+        width: 375px
+      }
+
+      .u-block-8e51-8 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-9 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-11 {
+        width: 375px
+      }
+
+      .u-block-8e51-12 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-13 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-15 {
+        width: 375px
+      }
+
+      .u-block-8e51-16 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-17 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-19 {
+        width: 375px
+      }
+
+      .u-block-8e51-20 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-21 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-23 {
+        width: 375px
+      }
+
+      .u-block-8e51-24 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-25 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-27 {
+        width: 375px
+      }
+
+      .u-block-8e51-28 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-29 {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 40px
+      }
+
+      .u-block-8e51-30 {
+        position: absolute;
+        right: 10px;
+        width: 40px;
+        height: 40px
+      }
+    }
+  </style>
+  <style data-mode="XS" data-visited="true">
+    @media (max-width: 0px) {
+      .u-block-8e51-1 {
+        background-image: none
+      }
+
+      .u-block-8e51-2 {
+        min-height: 550px
+      }
+
+      .u-block-8e51-31 {
+        margin-top: 53px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px
+      }
+
+      .u-block-8e51-3 {
+        margin-top: 30px;
+        margin-bottom: 53px;
+        height: 375px
+      }
+
+      .u-block-8e51-5 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-7 {
+        width: 375px
+      }
+
+      .u-block-8e51-8 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-9 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-11 {
+        width: 375px
+      }
+
+      .u-block-8e51-12 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-13 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-15 {
+        width: 375px
+      }
+
+      .u-block-8e51-16 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-17 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-19 {
+        width: 375px
+      }
+
+      .u-block-8e51-20 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-21 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-23 {
+        width: 375px
+      }
+
+      .u-block-8e51-24 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-25 {
+        margin-right: 10px
+      }
+
+      .u-block-8e51-27 {
+        width: 375px
+      }
+
+      .u-block-8e51-28 {
+        background-image: linear-gradient(0deg, rgba(var(--black-r), var(--black-g), var(--black-b), 0.2), rgba(var(--black-r), var(--black-g), var(--black-b), 0.2));
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px
+      }
+
+      .u-block-8e51-29 {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 40px
+      }
+
+      .u-block-8e51-30 {
+        position: absolute;
+        right: 10px;
+        width: 40px;
+        height: 40px
+      }
+    }
+  </style>
+</section>
+{% endif %}
+
+<!-- end clinica -->
+<!-- Equipo de trabajo -->
+{% if clinica.empleados.all %}
+<div class="d-flex justify-content-center">
+  <p class="m-0" style="color: #478ac9; font-weight: bold; font-size: 1.7rem; text-transform: uppercase;">
+    <b>Nosotros</b></p>
+</div>
+<section class="u-align-center u-clearfix u-section-3" id="sec-b2b9"
+  style="background-image: linear-gradient(white, #f2f2f2);">
+
+  <div class="u-expanded-width u-palette-1-base u-shape u-shape-rectangle u-shape-1">
+  </div>
+  <div class="u-list u-list-1">
+    <div class="u-repeater u-repeater-1 row justify-content-center">
+      {% for e in clinica.empleados.all %}
+      <div class="u-align-center u-container-style u-grey-5 u-list-item u-repeater-item col-lg-4 col-12"
+        style="height: 350px;">
+        <div class="u-container-layout u-similar-container u-container-layout-1">
+          <div alt="" class="u-image u-image-circle u-image-1" data-image-width="420" data-image-height="420"
+            style="background-image: url('{{ e.image.url }}')"></div>
+          <h5 class="u-text u-text-default u-text-2"
+            style="color: #478ac9; font-size: 1rem; font-family: 'Nunito', sans-serif;">{{ e.name }} {{e.last_name}}
+          </h5>
+          {% for esp in e.especialidad.all %}
+          <h6 class="u-text u-text-default u-text-font u-text-3"><b
+              style="color: #053e5a; font-size: .8rem; font-family: 'Nunito', sans-serif;">{{ esp.name }}</b></h6>
+          {% endfor %}
+          <h6 class="u-text u-text-default u-text-2"
+            style="color: #478ac9; font-size: .9rem; font-family: 'Nunito', sans-serif;">C.O.P: {{ e.cop }}</h6>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- end equipo de trabajo -->
+{% endif %}
+{% endif %}
+
+{% endif %}
+
+
+
+{% include 'includes/footer.html' %}
+{% endblock content %}

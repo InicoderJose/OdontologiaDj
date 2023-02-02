@@ -1,0 +1,79 @@
+<div class="copyright w-100 m-0 p-0" style="background-color: rgb(2, 32, 95); height: 10%;" id="headertop">
+  <div class="w-100 copyright-list clearfix row">
+    <div class="col-4 d-flex justify-content-center flex-lg-row flex-column align-items-center">
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      <p> {{ info.gmail }}</p>
+    </div>
+    <div class="col-4 d-flex justify-content-center flex-lg-row flex-column align-items-center">
+      <i class="fa fa-phone mr-1" aria-hidden="true"></i>
+      <p> {{ info.phome }}</p>
+    </div>
+    <div class="col-4 d-flex justify-content-center flex-lg-row flex-column align-items-center">
+      <i class="fa fa-map-marker mr-1" aria-hidden="true"></i>
+      <p> {{ info.address }}-{{ info.district }}</p>
+    </div>
+  </div>
+</div>
+<nav class="navjose" style="min-height: auto">
+  <div id="logotrue">
+    {% if inicio %}
+    <div class="imgjose">
+      <a href=""><img class="logo-empresa" src="{{ inicio.logo.url }}" alt="{{ inicio.title }}"></a>   
+    </div>
+    {% endif %}
+    <div class="menu-jose" id="toggle-Button">
+      <div class="menu-line-jose"></div>
+      <div class="menu-line-jose"></div>
+      <div class="menu-line-jose"></div>
+    </div>
+  </div>
+  
+  <ul class="list-jose active" id="jose-list">
+    <li class="list_hijo"><a href="{% url 'home_app:inicio' %}">INICIO</a></li>
+
+    {% if clinica.public == True %}
+    <li class="list_hijo"><a href="{% url 'home_app:clinica' %}">CLÍNICA</a></li>
+    {% endif %}
+
+    {% if serv.public %}
+    <li class="list_hijo"><a href="{% url 'home_app:servicios-list' %}">SERVICIOS</a></li>
+    {% endif %}
+
+    {% if tec.public %}
+    <li class="list_hijo"><a href="{% url 'home_app:tecnos-list' %}">TECNOLOGÍAS</a></li>
+    {% endif %}
+    
+    {% if ayd.public %}
+    <li class="list_hijo"><a href="{% url 'home_app:antesdespues' %}">ANTES/DESPUES</a></li>
+    {% endif %}
+
+    {% if contacto.email %}
+    <li class="list_hijo"><a href="{% url 'home_app:contacto' %}">CONTÁCTO</a></li>
+    {% endif %}
+
+    {% if horario.public and horario.info %}
+    <li class="list_hijo"><a href="{% url 'home_app:horarioUbicacion' %}">HORARIO/UBICACIÓN</a></li>
+    {% else %}
+      {% if horario.public %}
+      <li class="list_hijo"><a href="{% url 'home_app:horarioUbicacion' %}">HORARIO</a></li>
+      {% else %}
+        {% if horario.info %}
+        <li class="list_hijo"><a href="{% url 'home_app:horarioUbicacion' %}">UBICACIÓN</a></li>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  </ul>
+  
+  <div class="iconos_jose justify-content-between justify-content-center" id="icon_jose">
+    {% if contacto.wsp %}
+      
+          <a type="button" target="_blank" class="btn" href="https://api.whatsapp.com/send?phone=51{% if info %}{{contacto.phome}}{% endif %}&text=Bienvenid@, en que podemos ayudarte? :)" style="color: white;"><i class="fa fa-whatsapp" aria-hidden="true" style="color: white; font-size: 1.5em;"></i> WHATSAPP</a>
+          <!-- <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a> -->
+      
+    {% endif %}
+  </div>
+
+  
+</nav>
+
+
